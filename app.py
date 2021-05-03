@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-base_link = 'https://t2-integracion-2021-1.herokuapp.com/'
+base_link = 'https://t2-integracion-2021-1.herokuapp.com'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
