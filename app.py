@@ -257,7 +257,7 @@ def album(ide):
             return '404', 404
 
 
-@app.route('/albums/<album_id>/play', methods=['PUT'])
+@app.route('/albums/<album_id>/tracks/play', methods=['PUT'])
 def play_album(album_id):
     try:
         any_album = Album.query.get(album_id)
