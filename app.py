@@ -186,7 +186,7 @@ def artist_album(artist_id):
                     db.session.commit()
                     return album_schema.jsonify(new_album), 201
             else:
-                return '422: Artist not found', 404
+                return '422: Artist not found', 422
         except TypeError:
             return '400: Invalid input', 400
         except KeyError:
@@ -308,7 +308,7 @@ def album_track(album_id):
                     db.session.commit()
                     return track_schema.jsonify(new_track), 201
             else:
-                return '422: Album not found', 404
+                return '422: Album not found', 422
         except TypeError:
             return '400: Invalid input', 400
         except KeyError:
