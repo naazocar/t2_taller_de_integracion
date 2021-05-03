@@ -120,7 +120,7 @@ def artists():
             new_id = b64encode(name.encode()).decode('utf-8')[0:22]
             any_artist = Artist.query.get(new_id)
             if any_artist:
-                return '409: Conflict', 409
+                return artist_schema.jsonify(any_artist), 409
             else:
                 new_artist = Artist(name, age)
                 db.session.add(new_artist)
@@ -179,7 +179,7 @@ def artist_album(artist_id):
                 new_id = b64encode(new_str.encode()).decode('utf-8')[0:22]
                 any_album = Album.query.get(new_id)
                 if any_album:
-                    return '409: Conflict', 409
+                    return album_schema.jsonify(any_album), 409
                 else:
                     new_album = Album(name, genre, artist_id)
                     db.session.add(new_album)
@@ -278,10 +278,14 @@ def play_album(album_id):
 def album_track(album_id):
     if request.method == 'GET':
         any_album = Album.query.get(album_id)
+        print(any_album)
         if any_album:
             any_link = any_album.self
+            print(any_link)
             all_tracks = db.session.query(Track).filter_by(album=any_link)
+            print(all_tracks.all())
             result = albums_schema.dump(all_tracks)
+            print(result)
             return jsonify(result), 200
         else:
             return '404: Album not found', 404
@@ -297,7 +301,7 @@ def album_track(album_id):
                 artist_id = any_album.artist_id
                 any_track = Track.query.get(new_id)
                 if any_track:
-                    return '409: Conflict', 409
+                    return track_schema.jsonify(any_track), 409
                 else:
                     new_track = Track(name, artist_id, album_id, duration)
                     db.session.add(new_track)
