@@ -67,7 +67,7 @@ class Album(db.Model):
 
 class AlbumSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'genre', 'artist', 'tracks', 'self')
+        fields = ('id', 'name', 'genre', 'artist', 'tracks', 'self', 'artist_id')
 
 album_schema = AlbumSchema()
 albums_schema = AlbumSchema(many=True)
