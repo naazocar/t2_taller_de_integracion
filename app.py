@@ -278,14 +278,10 @@ def play_album(album_id):
 def album_track(album_id):
     if request.method == 'GET':
         any_album = Album.query.get(album_id)
-        print(any_album)
         if any_album:
             any_link = any_album.self
-            print(any_link)
             all_tracks = db.session.query(Track).filter_by(album=any_link)
-            print(all_tracks.all())
-            result = albums_schema.dump(all_tracks)
-            print(result)
+            result = tracks_schema.dump(all_tracks)
             return jsonify(result), 200
         else:
             return '404: Album not found', 404
